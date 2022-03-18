@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/prueba', function () {
+    return view('prueba');
+});
+Route::get('/formulario', function () {
+    return view('formulario');
+});
+Route::post('/proceso', function(){
+    //capturamos dato del form
+    $frase = $_POST['frase'];
+    //pasamos dato a la vista como array asoc
+    return view('proceso', ['frase'=> $frase]);
+});
+Route::view('/inicio2', 'inicio');
