@@ -1,4 +1,7 @@
-@extends ('layouts.testPlantilla')
+@extends('layouts.plantilla')
     @section('contenido')
-        <h1>Inicio usando una plantilla blade</h1>
+
+        <h1>Contenido de la página</h1>
+        
+
     @endsection

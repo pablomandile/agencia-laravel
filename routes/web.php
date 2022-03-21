@@ -42,3 +42,27 @@ Route::get('/destinos', function(){
     $destinos = \Illuminate\Support\Facades\DB::table('destinos')->get();
     return view('destinos', ['destinos'=>$destinos]);
 });
+
+######## CRUD regiones
+
+/* Métodos Raw SQL
+* 
+* DB::select();
+* DB::insert();
+* DB::update();
+* DB::delete();
+*
+* Métodos Fluent Query Builder
+*
+* DB::table('nTable')->get();
+* DB::table('nTable')->select('campo')->get();
+* DB::tablo('nTable')->where(condicion)->get();
+*/
+
+Route::get('/adminRegiones', function(){
+    // traemos listado de regiones
+    //$regiones = DB::select('SELECT regID, regNombre FROM regiones');
+
+    $regiones = DB::table('regiones')->get();
+    return view('adminRegiones', ['regiones'=>$regiones]);
+});
