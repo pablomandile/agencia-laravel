@@ -66,3 +66,26 @@ Route::get('/adminRegiones', function(){
     $regiones = DB::table('regiones')->get();
     return view('adminRegiones', ['regiones'=>$regiones]);
 });
+
+Route::get('/adminDestinos', function(){
+    // traemos listado de destinos
+    //$destinos = DB::select('SELECT destID, destNombre FROM destinos');
+
+    $destinos = DB::table('destinos')->get();
+    return view('adminDestinos', ['destinos'=>$destinos]);
+});
+
+Route::get('/agregarRegion', function(){
+    return view('agregarRegion');
+});
+
+Route::post('/agregarRegion', function(){
+    $regNombre = $POST['regNombre'];
+    // con raw sql sería: 
+   /* DB::insert('INSERT INTO regiones 
+            VALUES (:regNombre), [regNombre]'
+            );
+    */
+    DB::table('regiones')->insert(['regNombre'=>$regNombre]);
+    return redirect('/adminRegiones');
+});
