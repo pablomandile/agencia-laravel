@@ -89,5 +89,43 @@ Route::post('/agregarRegion', function(){
     DB::table('regiones')->insert(['regNombre'=>$regNombre]);
     return redirect('/adminRegiones')
                 ->with('mensaje', 'Región: '.$regNombre.' agregada correctamente');
-    
+});
+
+Route::get('/agregarDestino', function(){
+    return view('agregarDestino');
+});
+
+Route::post('/agregarDestino', function(){
+    $destNombre = $_POST['destNombre'];
+    DB::table('destinos')->insert(['destNombre'=>$destNombre]);
+    return redirect('/adminDestinos')
+                ->with('mensaje', 'Destino: '.$destNombre.' agregado correctamente');
+});
+
+Route::get('/modificarRegion/{regID}', function($regID){
+    // obtener datos de la región según su ID
+/*  $region = DB::select('SELECT regID, regNombre
+                            FROM REGIONES
+                            WHERE regID = ?', [$regID]);
+                            */
+/*  $region = DB::select('SELECT regID, regNombre
+                            FROM regiones
+                            WHERE regID = :regID
+                            AND x = :x' , [':regID'=>$regID, ':x'=>$x]);
+                            */ // CON RAW SQL
+    //con Facade (patron de diseño) no es necesario abrir la conexión, ni el prepare ni el data biding 
+    $region = DB::table('regiones')
+                    ->where('regID', $regID)
+                    ->first(); // esto es lo mismo que fetch
+                    //->get();  esto sería lo mismo que fetchAll un array de arrays
+    // retornar la vista del form con los datos ya cargados
+    return view('modificarRegion', [ 'region'=>$region]);
+});
+
+Route::post('/modificarRegion', function(){
+    $regNombre = $_POST['regNombre'];
+    $regID = $_POST['regID'];
+    DB::table('regiones')->where('regID', $regID)
+                        ->update(['regNombre'=>$regNombre]);
+    return redirect('/adminRegiones')->with('mensaje', 'Región: '.$regNombre.' modificada correctamente');
 });

@@ -9,7 +9,7 @@
                     <th>#</th>
                     <th>Destino</th>
                     <th colspan="2">
-                        <a href="" class="btn btn-dark">Agregar</a>
+                        <a href="agregarDestino" class="btn btn-dark">Agregar</a>
                     </th>
                 </tr>
             </thead>
