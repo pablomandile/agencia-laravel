@@ -80,12 +80,14 @@ Route::get('/agregarRegion', function(){
 });
 
 Route::post('/agregarRegion', function(){
-    $regNombre = $POST['regNombre'];
+    $regNombre = $_POST['regNombre'];
     // con raw sql sería: 
    /* DB::insert('INSERT INTO regiones 
             VALUES (:regNombre), [regNombre]'
             );
     */
     DB::table('regiones')->insert(['regNombre'=>$regNombre]);
-    return redirect('/adminRegiones');
+    return redirect('/adminRegiones')
+                ->with('mensaje', 'Región: '.$regNombre.' agregada correctamente');
+    
 });
