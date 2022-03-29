@@ -8,6 +8,8 @@
                 <tr>
                     <th>#</th>
                     <th>Destino</th>
+                    <th>Región</th>
+                    <th>Precio</th>
                     <th colspan="2">
                         <a href="agregarDestino" class="btn btn-dark">Agregar</a>
                     </th>
@@ -18,8 +20,10 @@
                 <tr>
                     <td>{{$destino->destID}}</td>
                     <td>{{$destino->destNombre}}</td>
-                    <td><a href="" class="btn btn-outline-secondary">Modificar</a></td>
-                    <td><a href="" class="btn btn-outline-secondary">Eliminar</a></td>
+                    <td>{{$destino->regNombre}}</td>
+                    <td>{{$destino->destPrecio}}</td>
+                    <td><a href="/formModificarDestino/id" class="btn btn-outline-secondary">Modificar</a></td>
+                    <td><a href="/formEliminarDestino/id" class="btn btn-outline-secondary">Eliminar</a></td>
                 </tr>
             @endforeach
             </tbody>
