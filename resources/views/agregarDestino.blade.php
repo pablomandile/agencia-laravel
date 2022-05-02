@@ -1,15 +1,32 @@
 @extends('layouts.plantilla')
     @section('contenido')
-
+    
         <h1>Alta de un nuevo destino</h1>
-        <div class="alert bg-light shadow-sm col-8 mx-auto p-4">
+        <div class="alert bg-light border shadow-sm p-4">
             <form action="/agregarDestino" method="post">
-                @csrf
+            @csrf
                 <label for="destNombre">Nombre del destino</label>
-                <input type="text" name="destNombre" id="destNombre" class="form-control">
+                <input type="text" name="destNombre" id="destNombre" class="form-control" required>
                 <br>
-                <button class="btn btn-dark">Agregar destino</button>
-                <a href="/adminDestinos" class="btn btn-outline-secondary ml-3">Volver a panel Destinos</a>
+                Región: <br>
+                <select name="regID" class="form-control" required>
+                    <option value="">Seleccione una Región</option>
+                    @foreach ($regiones as $region)
+                    <option value="{{ $region->regID }}">{{ $region->regNombre }}</option>
+                    @endforeach
+                </select>
+                <br>
+                Precio: <br>
+                <input type="number" name="destPrecio" class="form-control" required>
+                <br>
+                Asientos Totales: <br>
+                <input type="nusmber" name="destAsientos" class="form-control" required>
+                <br>
+                Asientos Disponibles: <br>
+                <input type="number" name="destDisponibles" class="form-control" required>
+                <br>
+                <button class="btn btn-dark">Agregar</button>
+                <a href="/adminDestinos" class="btn btn-outline-secondary ml-3">Volver a panel</a>
             </form>
         </div>
 

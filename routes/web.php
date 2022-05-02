@@ -83,17 +83,6 @@ Route::post('/agregarRegion', function(){
                 ->with('mensaje', 'Región: '.$regNombre.' agregada correctamente');
 });
 
-Route::get('/agregarDestino', function(){
-    return view('agregarDestino');
-});
-
-Route::post('/agregarDestino', function(){
-    $destNombre = $_POST['destNombre'];
-    DB::table('destinos')->insert(['destNombre'=>$destNombre]);
-    return redirect('/adminDestinos')
-                ->with('mensaje', 'Destino: '.$destNombre.' agregado correctamente');
-});
-
 Route::get('/modificarRegion/{regID}', function($regID){
     // obtener datos de la región según su ID
 /*  $region = DB::select('SELECT regID, regNombre
@@ -158,3 +147,21 @@ Route::get('/adminDestinos', function(){
                         ->get();
     return view('adminDestinos', ['destinos'=>$destinos]);
 });
+
+Route::get('/agregarDestino',function (){
+    $regiones = DB::table('regiones')->get();
+    return view('agregarDestino', ['regiones'=>$regiones]);
+});
+
+// Route::get('/agregarDestino',function (){
+//     // $regiones = DB::table('regiones')->get();
+//     return view('agregarDestino');
+// });
+
+Route::post('/agregarDestino', function(){
+    $destNombre = $_POST['destNombre'];
+    DB::table('destinos')->insert(['destNombre'=>$destNombre]);
+    return redirect('/adminDestinos')
+                ->with('mensaje', 'Destino: '.$destNombre.' agregado correctamente');
+});
+

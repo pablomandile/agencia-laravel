@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
     @section('contenido')
         <h1>Baja de una región</h1>
-        <div class="alert bg-light border-danger shadow-sm p-4 mx-auto">
+        <div class="alert bg-light border-danger col-6 shadow-sm p-4 mx-auto">
             <form action="/eliminarRegion" method="post">
                 @csrf
                 Región: <span class="lead">{{$region->regNombre}} </span>
