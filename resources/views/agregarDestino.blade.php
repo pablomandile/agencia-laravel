@@ -2,7 +2,7 @@
     @section('contenido')
     
         <h1>Alta de un nuevo destino</h1>
-        <div class="alert bg-light border shadow-sm p-4">
+        <div class="alert bg-light border-white col-8 mx-auto shadow rounded p-4">
             <form action="/agregarDestino" method="post">
             @csrf
                 <label for="destNombre">Nombre del destino</label>
@@ -20,7 +20,7 @@
                 <input type="number" name="destPrecio" class="form-control" required>
                 <br>
                 Asientos Totales: <br>
-                <input type="nusmber" name="destAsientos" class="form-control" required>
+                <input type="number" name="destAsientos" class="form-control" required>
                 <br>
                 Asientos Disponibles: <br>
                 <input type="number" name="destDisponibles" class="form-control" required>

@@ -160,7 +160,19 @@ Route::get('/agregarDestino',function (){
 
 Route::post('/agregarDestino', function(){
     $destNombre = $_POST['destNombre'];
-    DB::table('destinos')->insert(['destNombre'=>$destNombre]);
+    $regID = $_POST['regID'];
+    $destPrecio = $_POST['destPrecio'];
+    $destAsientos = $_POST['destAsientos'];
+    $destDisponibles = $_POST['destDisponibles'];
+    DB::table('destinos')->insert(
+        [
+            'destNombre'=>$destNombre,
+            'regID'=>$regID,
+            'destPrecio'=>$destPrecio,
+            'destAsientos'=>$destAsientos,
+            'destDisponibles'=>$destDisponibles
+        ]
+    );
     return redirect('/adminDestinos')
                 ->with('mensaje', 'Destino: '.$destNombre.' agregado correctamente');
 });
