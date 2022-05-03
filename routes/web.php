@@ -177,3 +177,57 @@ Route::post('/agregarDestino', function(){
                 ->with('mensaje', 'Destino: '.$destNombre.' agregado correctamente');
 });
 
+Route::get('/modificarDestino/{destID}', function($destID){
+    //obtenemos datos de un destipo por su id
+    $destino = DB::table('destinos as d')
+                    ->join('regiones as r', 'd.regID', '=', 'r.regID')
+                    ->where('destID', $destID)
+                    ->first();
+    //obtenemos listado de regiones
+    $regiones = DB::table('regiones')->get();
+
+    return view('modificarDestino', 
+                        [
+                            'destino'=>$destino,
+                            'regiones'=>$regiones
+                        ]
+    );
+});
+
+Route::post('/modificarDestino', function(){
+    $destNombre = $_POST['destNombre'];
+    $regID = $_POST['regID'];
+    $destID = $_POST['destID'];
+    $destPrecio = $_POST['destPrecio'];
+    $destAsientos = $_POST['destAsientos'];
+    $destDisponibles = $_POST['destDisponibles'];
+    DB::table('destinos')
+            ->where('destID', $destID)
+            ->update(
+                [
+                    'destNombre'=>$destNombre,
+                    'regID'=>$regID,
+                    'destPrecio'=>$destPrecio,
+                    'destAsientos'=>$destAsientos,
+                    'destDisponibles'=>$destDisponibles,
+                ]
+        );
+    return redirect('/adminDestinos')
+                ->with('mensaje', 'Destino: '.$destNombre.' modificado correctamente');
+});
+Route::get('/eliminarDestino/{destID}', function($destID){
+    $destino = DB::table('destinos')
+    ->where('destID', $destID)
+    ->first();
+    // retornar la vista informativa para confirmar
+    return view('eliminarDestino', [ 'destino'=>$destino ]);
+});
+
+Route::post('/eliminarDestino', function(){
+    $destNombre = $_POST['destNombre'];
+    $destID = $_POST['destID'];
+    DB::table('destinos')
+                ->where('destID', $destID)
+                ->delete();
+    return redirect('adminDestinos')->with('mensaje', 'Destino: '.$destNombre.' eliminado correctamente');
+});

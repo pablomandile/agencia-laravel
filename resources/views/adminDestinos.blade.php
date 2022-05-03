@@ -2,7 +2,9 @@
     @section('contenido')
 
         <h1>Panel de administración de destinos</h1>
-        
+        @if(session('mensaje'))
+            <div class="alert alert-success">{{session('mensaje')}}</div>
+        @endif
         <table class="table table-striped table-hover table-borderless">
             <thead class="thead-dark">
                 <tr>
@@ -22,8 +24,8 @@
                     <td>{{$destino->destNombre}}</td>
                     <td>{{$destino->regNombre}}</td>
                     <td>${{$destino->destPrecio}}</td>
-                    <td><a href="/ModificarDestino/id" class="btn btn-outline-secondary">Modificar</a></td>
-                    <td><a href="/EliminarDestino/id" class="btn btn-outline-secondary">Eliminar</a></td>
+                    <td><a href="/modificarDestino/{{$destino->destID}}" class="btn btn-outline-secondary">Modificar</a></td>
+                    <td><a href="/eliminarDestino/{{$destino->destID}}" class="btn btn-outline-secondary">Eliminar</a></td>
                 </tr>
             @endforeach
             </tbody>
